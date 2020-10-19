@@ -23,13 +23,13 @@ public class EditCommand extends Command {
     @Override
     public void execute(FoodList foodList, ExerciseList exerciseList, Storage storage, User user) {
         Matcher matcher = ARGUMENT_FORMAT.matcher(arguments.trim());
+        int index;
 
         if (!matcher.matches()) {
             throw new IllegalArgumentException();
         }
 
         String argument = matcher.group("argument");
-        int index = Integer.parseInt(matcher.group("index").trim());
 
         switch (argument) {
         case Messages.EDIT_NAME:
@@ -48,9 +48,11 @@ public class EditCommand extends Command {
             editGender(user);
             break;
         case Commands.COMMAND_EXERCISE:
+            index = Integer.parseInt(matcher.group("index").trim());
             editExercise(exerciseList, index);
             break;
         case Commands.COMMAND_FOOD:
+            index = Integer.parseInt(matcher.group("index").trim());
             editFood(foodList, index);
             break;
         default:
