@@ -6,6 +6,7 @@ import fitr.storage.Storage;
 import fitr.user.User;
 import fitr.ui.Ui;
 
+import static fitr.common.Commands.*;
 import static fitr.common.Messages.ERROR_INVALID_VIEW_COMMAND;
 import static fitr.common.Messages.EMPTY_FOOD_LIST;
 import static fitr.common.Messages.EMPTY_EXERCISE_LIST;
@@ -24,29 +25,23 @@ import static fitr.common.Messages.CAL_HEADER;
 import static fitr.common.Messages.EXERCISE_HEADER;
 import static fitr.common.Messages.BURNT_CAL_HEADER;
 
-import static fitr.common.Commands.COMMAND_VIEW_FOOD;
-import static fitr.common.Commands.COMMAND_VIEW_EXERCISE;
-import static fitr.common.Commands.COMMAND_VIEW_SUMMARY;
-import static fitr.common.Commands.COMMAND_VIEW_BMI;
-import static fitr.common.Commands.COMMAND_VIEW_PROFILE;
-
 public class ViewCommand extends Command {
 
-    public ViewCommand(String command) {
-        this.command = command;
+    public ViewCommand(String arguments) {
+        this.arguments = arguments;
     }
 
     @Override
     public void execute(FoodList foodList, ExerciseList exerciseList, Storage storage, User user) {
-        if (command.equalsIgnoreCase(COMMAND_VIEW_FOOD)) {
+        if (arguments.equalsIgnoreCase(COMMAND_FOOD)) {
             viewFood(foodList);
-        } else if (command.equalsIgnoreCase(COMMAND_VIEW_EXERCISE)) {
+        } else if (arguments.equalsIgnoreCase(COMMAND_EXERCISE)) {
             viewExercise(exerciseList);
-        } else if (command.equalsIgnoreCase(COMMAND_VIEW_SUMMARY)) {
+        } else if (arguments.equalsIgnoreCase(COMMAND_VIEW_SUMMARY)) {
             viewSummary(foodList, exerciseList, user);
-        } else if (command.equalsIgnoreCase(COMMAND_VIEW_BMI)) {
+        } else if (arguments.equalsIgnoreCase(COMMAND_VIEW_BMI)) {
             viewBmi(user);
-        } else if (command.equalsIgnoreCase(COMMAND_VIEW_PROFILE)) {
+        } else if (arguments.equalsIgnoreCase(COMMAND_VIEW_PROFILE)) {
             viewProfile(user);
         } else {
             Ui.printCustomError(ERROR_INVALID_VIEW_COMMAND);

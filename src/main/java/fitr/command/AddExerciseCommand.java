@@ -12,31 +12,31 @@ import fitr.user.User;
 import java.io.IOException;
 
 public class AddExerciseCommand extends Command {
-    public AddExerciseCommand(String command) {
-        this.command = command;
+    public AddExerciseCommand(String arguments) {
+        this.arguments = arguments;
     }
 
     @Override
     public void execute(FoodList foodlist, ExerciseList exerciseList, Storage storage, User user) {
-        command = command.split(" ", 2)[1];
+        arguments = arguments.split(" ", 2)[1];
         try {
-            String nameOfExercise = command.split("/", 2)[0];
+            String nameOfExercise = arguments.split("/", 2)[0];
             if (nameOfExercise.isEmpty()) {
                 throw new ArrayIndexOutOfBoundsException();
             }
             nameOfExercise = nameOfExercise.trim();
-            command = command.split("/", 2)[1];
-            if (command.split(" ").length == 1) {
-                Calorie amountOfCaloriesBurnt = new Calorie(Integer.parseInt(command.split(" ")[0]));
+            arguments = arguments.split("/", 2)[1];
+            if (arguments.split(" ").length == 1) {
+                Calorie amountOfCaloriesBurnt = new Calorie(Integer.parseInt(arguments.split(" ")[0]));
                 if (amountOfCaloriesBurnt.get() < -1) {
                     throw new NumberFormatException();
                 }
                 exerciseList.addExercise(new Exercise(nameOfExercise, amountOfCaloriesBurnt));
                 storage.writeExerciseList(exerciseList);
                 Ui.printCustomMessage("The following exercise has been added: " + nameOfExercise);
-            } else if (command.split(" ").length == 2) {
-                Calorie amountOfCaloriesBurnt = new Calorie(Integer.parseInt(command.split(" ")[0]));
-                int durationOfExercise = Integer.parseInt(command.split(" ", 2)[1]);
+            } else if (arguments.split(" ").length == 2) {
+                Calorie amountOfCaloriesBurnt = new Calorie(Integer.parseInt(arguments.split(" ")[0]));
+                int durationOfExercise = Integer.parseInt(arguments.split(" ", 2)[1]);
                 if (amountOfCaloriesBurnt.get() < 0) {
                     throw new NumberFormatException();
                 }

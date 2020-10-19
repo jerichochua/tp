@@ -12,20 +12,20 @@ import java.io.IOException;
 public class EditProfileCommand extends Command {
 
     public EditProfileCommand(String command) {
-        this.command = command;
+        this.arguments = command;
     }
 
     @Override
     public void execute(FoodList foodlist, ExerciseList exerciseList, Storage storage, User user) {
-        if (command.equalsIgnoreCase(Messages.EDIT_NAME)) {
+        if (arguments.equalsIgnoreCase(Messages.EDIT_NAME)) {
             editName(user);
-        } else if (command.equalsIgnoreCase(Messages.EDIT_HEIGHT)) {
+        } else if (arguments.equalsIgnoreCase(Messages.EDIT_HEIGHT)) {
             editHeight(user);
-        } else if (command.equalsIgnoreCase(Messages.EDIT_WEIGHT)) {
+        } else if (arguments.equalsIgnoreCase(Messages.EDIT_WEIGHT)) {
             editWeight(user);
-        } else if (command.equalsIgnoreCase(Messages.EDIT_AGE)) {
+        } else if (arguments.equalsIgnoreCase(Messages.EDIT_AGE)) {
             editAge(user);
-        } else if (command.equalsIgnoreCase(Messages.EDIT_GENDER)) {
+        } else if (arguments.equalsIgnoreCase(Messages.EDIT_GENDER)) {
             editGender(user);
         } else {
             Ui.printInvalidCommandError();

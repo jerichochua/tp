@@ -13,30 +13,30 @@ import java.io.IOException;
 
 public class AddFoodCommand extends Command {
     public AddFoodCommand(String command) {
-        this.command = command;
+        this.arguments = command;
     }
 
     @Override
     public void execute(FoodList foodlist, ExerciseList exerciseList, Storage storage, User user) {
-        command = command.split(" ", 2)[1];
+        arguments = arguments.split(" ", 2)[1];
         try {
-            String nameOfFood = command.split("/", 2)[0];
+            String nameOfFood = arguments.split("/", 2)[0];
             nameOfFood = nameOfFood.trim();
             if (nameOfFood.isEmpty()) {
                 throw new ArrayIndexOutOfBoundsException();
             }
-            command = command.split("/", 2)[1];
-            if (command.split(" ").length == 1) {
-                Calorie amountOfCalories = new Calorie(Integer.parseInt(command.split(" ")[0]));
+            arguments = arguments.split("/", 2)[1];
+            if (arguments.split(" ").length == 1) {
+                Calorie amountOfCalories = new Calorie(Integer.parseInt(arguments.split(" ")[0]));
                 if (amountOfCalories.get() < 0) {
                     throw new NumberFormatException();
                 }
                 foodlist.addFood(new Food(nameOfFood, amountOfCalories));
                 storage.writeFoodList(foodlist);
                 Ui.printCustomMessage("The following food has been added: " + nameOfFood);
-            } else if (command.split(" ").length == 2) {
-                Calorie amountOfCalories = new Calorie(Integer.parseInt(command.split(" ")[0]));
-                int amountOfFood = Integer.parseInt(command.split(" ", 2)[1]);
+            } else if (arguments.split(" ").length == 2) {
+                Calorie amountOfCalories = new Calorie(Integer.parseInt(arguments.split(" ")[0]));
+                int amountOfFood = Integer.parseInt(arguments.split(" ", 2)[1]);
                 if (amountOfCalories.get() < 0) {
                     throw new NumberFormatException();
                 }

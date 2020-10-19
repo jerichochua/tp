@@ -10,22 +10,22 @@ import java.io.IOException;
 
 public class DeleteCommand extends Command {
     public DeleteCommand(String command) {
-        this.command = command;
+        this.arguments = command;
     }
 
     @Override
     public void execute(FoodList foodlist, ExerciseList exerciseList, Storage storage, User user) {
         try {
-            command = command.split(" ", 2)[1];
-            String type = command.split(" ", 2)[0];
+            arguments = arguments.split(" ", 2)[1];
+            String type = arguments.split(" ", 2)[0];
             if (type.equals("food")) {
-                int deletionIndex = Integer.parseInt(command.split(" ", 2)[1]);
+                int deletionIndex = Integer.parseInt(arguments.split(" ", 2)[1]);
                 Ui.printCustomMessage("The following has been deleted from the list of food consumed: "
                         + foodlist.getFood(deletionIndex - 1).getFoodName());
                 foodlist.deleteFood(deletionIndex - 1);
                 storage.writeFoodList(foodlist);
             } else if (type.equals("exercise")) {
-                int deletionIndex = Integer.parseInt(command.split(" ", 2)[1]);
+                int deletionIndex = Integer.parseInt(arguments.split(" ", 2)[1]);
                 Ui.printCustomMessage("The following has been deleted from the list of food consumed: "
                         + exerciseList.getExercise(deletionIndex - 1).getNameOfExercise());
                 exerciseList.deleteExercise(deletionIndex - 1);
