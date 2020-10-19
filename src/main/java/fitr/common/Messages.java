@@ -42,7 +42,7 @@ public class Messages {
     public static final String ERROR_INVALID_INDEX = "Please input a valid index!\n";
     public static final String ERROR_INVALID_CALORIES = "Sorry! Calories should be a number.\n";
 
-    //ViewCommand class messages
+    // ViewCommand class messages
     public static final String ERROR_INVALID_VIEW_COMMAND = "Sorry this is an invalid view command!\n";
     public static final String EMPTY_FOOD_LIST = "The food list is empty...";
     public static final String EMPTY_EXERCISE_LIST = "The exercise list is empty...";
@@ -61,7 +61,7 @@ public class Messages {
     public static final String CAL_HEADER = "Cal: ";
     public static final String BURNT_CAL_HEADER = "Burnt Cal: ";
 
-    //EditProfileCommand class messages
+    // EditCommand class messages
     public static final String EDIT_NAME = "name";
     public static final String EDIT_HEIGHT = "height";
     public static final String EDIT_WEIGHT = "weight";
