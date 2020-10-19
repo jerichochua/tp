@@ -38,11 +38,11 @@ public class Parser {
         case Commands.COMMAND_EDIT:
             return new EditProfileCommand(arguments);
         case Commands.COMMAND_HELP:
-            return new HelpCommand(arguments);
+            return new HelpCommand();
         case Commands.COMMAND_DELETE:
             return new DeleteCommand(arguments);
         case Commands.COMMAND_BYE:
-            return new ExitCommand(arguments);
+            return new ExitCommand();
         default:
             return new InvalidCommand(userInput);
         }
