@@ -10,9 +10,8 @@ import fitr.user.User;
 import java.io.IOException;
 
 public class EditProfileCommand extends Command {
-
-    public EditProfileCommand(String command) {
-        this.arguments = command;
+    public EditProfileCommand(String arguments) {
+        this.arguments = arguments;
     }
 
     @Override
@@ -30,13 +29,12 @@ public class EditProfileCommand extends Command {
         } else {
             Ui.printInvalidCommandError();
         }
+
         try {
             storage.writeUserConfigFile(user);
         } catch (IOException e) {
             Ui.printCustomMessage(Messages.MISSING_FILE);
-
         }
-
     }
 
     @Override
