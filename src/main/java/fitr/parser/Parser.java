@@ -9,34 +9,40 @@ import fitr.command.HelpCommand;
 import fitr.command.InvalidCommand;
 import fitr.command.ViewCommand;
 import fitr.command.EditProfileCommand;
+import fitr.common.Commands;
+import fitr.exception.IllegalCommandException;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser {
-    public static Command parse(String userInput) {
-        String[] fullCommand = userInput.split("\\s+");
-        switch (fullCommand[0].toLowerCase()) {
-        case "food":
-            if (fullCommand.length == 1) {
-                return new InvalidCommand(userInput);
-            }
-            return new AddFoodCommand(userInput);
-        case "exercise":
-            if (fullCommand.length == 1) {
-                return new InvalidCommand(userInput);
-            }
-            return new AddExerciseCommand(userInput);
-        case "view":
-            return new ViewCommand(userInput);
-        case "edit":
-            return new EditProfileCommand(userInput);
-        case "help":
-            return new HelpCommand(userInput);
-        case "delete":
-            if (fullCommand.length == 1) {
-                return new InvalidCommand(userInput);
-            }
-            return new DeleteCommand(userInput);
-        case "bye":
-            return new ExitCommand(userInput);
+    public static final Pattern COMMAND_FORMAT = Pattern.compile("(?<command>\\S+)(?<arguments>.*)");
+
+    public static Command parse(String userInput) throws IllegalCommandException {
+        Matcher matcher = COMMAND_FORMAT.matcher(userInput.trim());
+
+        if (!matcher.matches()) {
+            throw new IllegalCommandException();
+        }
+
+        String command = matcher.group("command").toLowerCase();
+        String arguments = matcher.group("arguments").trim();
+
+        switch (command) {
+        case Commands.COMMAND_FOOD:
+            return new AddFoodCommand(arguments);
+        case Commands.COMMAND_EXERCISE:
+            return new AddExerciseCommand(arguments);
+        case Commands.COMMAND_VIEW:
+            return new ViewCommand(arguments);
+        case Commands.COMMAND_EDIT:
+            return new EditProfileCommand(arguments);
+        case Commands.COMMAND_HELP:
+            return new HelpCommand(arguments);
+        case Commands.COMMAND_DELETE:
+            return new DeleteCommand(arguments);
+        case Commands.COMMAND_BYE:
+            return new ExitCommand(arguments);
         default:
             return new InvalidCommand(userInput);
         }

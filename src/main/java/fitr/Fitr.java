@@ -1,6 +1,7 @@
 package fitr;
 
 import fitr.command.Command;
+import fitr.exception.IllegalCommandException;
 import fitr.list.ExerciseList;
 import fitr.list.FoodList;
 import fitr.storage.Storage;
@@ -36,10 +37,14 @@ public class Fitr {
     public void run() {
         boolean isExit = false;
         while (!isExit) {
-            String userInput = Ui.read();
-            Command c = Parser.parse(userInput);
-            c.execute(foodList, exerciseList, storage, user);
-            isExit = c.isExit();
+            try {
+                String userInput = Ui.read();
+                Command c = Parser.parse(userInput);
+                c.execute(foodList, exerciseList, storage, user);
+                isExit = c.isExit();
+            } catch (IllegalCommandException e) {
+                Ui.printCustomError("Wrong command entered! Type 'help' for a list of commands.");
+            }
         }
         Ui.printExitMessage();
     }
